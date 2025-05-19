@@ -29,7 +29,8 @@ createRoot(document.getElementById("root")).render(
         fov: isMobile() ? fovForMobile : fovForPc,
         near: 0.1,
         far: 100,
-         position: [ -23.234795944690745, 3.2570048661493995, 26.918081948657154],
+        position: [-22.788208029999996, 3.204538337500003, 26.40998746],
+        //  position: [ -23.234795944690745, 3.2570048661493995, 26.918081948657154],
       }}
     >
       {/* <Suspense fallback={<Loader />}> */}

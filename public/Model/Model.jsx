@@ -25,22 +25,52 @@ export default function Model(props) {
     window.open(url, "_blank");
   };
 
-  const video = document.createElement("video");
+  // const video = document.createElement("video");
 
-  video.src = "./tv.mp4";
-  // video.muted = false;
-  video.volume = 0.9;
-  video.loop = true;
+  // video.src = "./tv.mp4";
+  // // video.muted = false;
+  // video.volume = 0.9;
+  // video.loop = true;
 
-  video.play();
+  // video.play();
 
-  const TVScreen = new THREE.VideoTexture(video);
+  // const TVScreen = new THREE.VideoTexture(video);
 
-  TVScreen.center.set(0.65, 0.32);
-  TVScreen.rotation = Math.PI / 2;
-  TVScreen.repeat.set(2, 1); // Zooms out to show more of the video (50%)
-  TVScreen.wrapS = THREE.ClampToEdgeWrapping;
-  TVScreen.wrapT = THREE.ClampToEdgeWrapping;
+  // TVScreen.center.set(0.65, 0.32);
+  // TVScreen.rotation = Math.PI / 2;
+  // TVScreen.repeat.set(2, 1); // Zooms out to show more of the video (50%)
+  // TVScreen.wrapS = THREE.ClampToEdgeWrapping;
+  // TVScreen.wrapT = THREE.ClampToEdgeWrapping;
+
+ 
+
+const video = document.createElement("video");
+
+video.src = "./tv.mp4";
+video.muted = true;             
+video.volume = 0;              
+video.loop = true;
+video.playsInline = true;       
+video.autoplay = true;           
+video.muted = true;            
+video.autoplay = true;         
+video.playsInline = true;      
+video.loop = true;
+video.preload = 'auto';  
+video.play().catch((err) => {
+  console.warn("Autoplay failed:", err);
+});
+
+const TVScreen = new THREE.VideoTexture(video);
+
+// Texture settings
+TVScreen.center.set(0.65, 0.32);
+TVScreen.rotation = Math.PI / 2;
+TVScreen.repeat.set(2, 1);
+TVScreen.wrapS = THREE.ClampToEdgeWrapping;
+TVScreen.wrapT = THREE.ClampToEdgeWrapping;
+
+
   function MessageBox() {
     const [formData, setFormData] = useState({
       name: "",
@@ -275,8 +305,8 @@ export default function Model(props) {
   const languagetexture = useLoader(TextureLoader, "./Textures/language.jpg");
   languagetexture.center.set(0.5, 0.5);
 
-  languagetexture.repeat.x = -1.1;
-  languagetexture.repeat.y = 1.2;
+  languagetexture.repeat.x = 1.2;
+  languagetexture.repeat.y = -1.2;
   couragetexture.center.set(0.5, 0.5);
   couragetexture.repeat.set(1, 1);
   couragetexture.wrapS = THREE.ClampToEdgeWrapping;
@@ -712,7 +742,9 @@ export default function Model(props) {
         geometry={nodes.windmill.geometry}
         material={nodes.windmill.material}
         position={[-5.44, -0.54, -21.085]}
-      />
+      >
+          <meshStandardMaterial color="#8b3e2f" metalness={0.2} roughness={9} />
+      </mesh>
       <mesh
         geometry={nodes.ground.geometry}
         material={nodes.ground.material}
@@ -777,14 +809,14 @@ export default function Model(props) {
           roughness={0.2} // Slightly shiny surface
         />
       </mesh>
-      <mesh
+      {/* <mesh
         geometry={nodes.shelfDoorRight.geometry}
         material={nodes.shelfDoorRight.material}
         position={[-2.393, 4.103, -6.612]}
         rotation={[-Math.PI, 0.824, -Math.PI]}
       >
         <meshPhysicalMaterial map={walltexture} />
-      </mesh>
+      </mesh> */}
       <mesh
         geometry={nodes.shelfBody.geometry}
         material={nodes.shelfBody.material}
@@ -792,14 +824,14 @@ export default function Model(props) {
       >
         <meshPhysicalMaterial map={walltexture} />
       </mesh>
-      <mesh
+      {/* <mesh
         geometry={nodes.shelfDoorLeft.geometry}
         material={nodes.shelfDoorLeft.material}
         position={[-3.148, 4.112, -6.612]}
         rotation={[Math.PI, -0.868, Math.PI]}
       >
         <meshPhysicalMaterial map={walltexture} />
-      </mesh>
+      </mesh> */}
       <mesh
         geometry={nodes.skillFrame1.geometry}
         material={nodes.skillFrame1.material}
@@ -1209,14 +1241,14 @@ export default function Model(props) {
       >
         //Tv
         <meshPhysicalMaterial
-          color="#135131"
+          map={walltexture}
           roughness={0.6}
           metalness={0.05}
           reflectivity={0.2}
           clearcoat={0.1}
         />
       </mesh>
-      <mesh
+      {/* <mesh
         geometry={nodes.TVScreen.geometry}
         material={nodes.TVScreen.material}
         position={[-0.392, 0.75, -2.192]}
@@ -1224,7 +1256,7 @@ export default function Model(props) {
         scale={0.534}
       >
         <meshPhysicalMaterial map={TVScreen} />
-      </mesh>
+      </mesh> */}
       //frontDoor
       {/* <mesh
         geometry={nodes.frontDoor.geometry}

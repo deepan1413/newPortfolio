@@ -52,14 +52,14 @@ export default function App() {
       </Clouds>
 
       <Model />
-      <ScrollControls pages={10} damping={2}>
-          <OrbitControls
-            enableZoom={true}
-            onChange={(e) => {
-              console.log("Camera Position:", e.target.object.position);
-              console.log("Camera Rotation:", e.target.object.rotation);
-            }}
-          />
+      <ScrollControls pages={11} >
+            {/* <OrbitControls
+              // enableZoom={true}
+              onChange={(e) => {
+                console.log("Camera Position:", e.target.object.position);
+                console.log("Camera Rotation:", e.target.object.rotation);
+              }}
+            /> */}
 
         <MyCameraScroll nodes={nodes} />
       </ScrollControls>
