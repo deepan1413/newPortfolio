@@ -8,17 +8,20 @@ import {
   useGLTF,
   Sky,
 } from "@react-three/drei";
+import { useEffect } from "react";
 import { Environment } from "@react-three/drei";
-import { Scene } from "three";
+import * as THREE from "three";
 // import KameHouse from "../public/Model/KameHouse";
 import CourageHouse from "../public/Model/CourageHouse";
+import Model from "../public/Model/Model";
 import Ocean from "../public/Model/Ocean";
 import { Cloud, Clouds } from "@react-three/drei";
 
 import MyCameraScroll from "./MyCameraControll";
 import ScrollHelper from "./components/Scrollhelper";
 export default function App() {
-  const { nodes } = useGLTF("./Model/scene.glb");
+  const { nodes } = useGLTF("./Model/model.glb");
+
   return (
     <>
       <Sky />
@@ -27,48 +30,40 @@ export default function App() {
       <directionalLight position={[10, 2, 3]} intensity={5} />
       <directionalLight position={[-10, -2, -3]} intensity={5} />
       <Clouds>
-        {/* <Cloud position={[0, 10, 0]} scale={1} opacity={0.5} />
-        <Cloud position={[1, 10, 0]} scale={1} opacity={0.5} />
-        <Cloud segments={40} bounds={[10, 2, 2]} volume={10} color="orange" />
-        <Cloud seed={1} scale={2} volume={5} color="hotpink" fade={100} /> */}
+        {/* <Cloud position={[0, 10, 0]} scale={1} opacity={0.5} /> */}
+        <Cloud
+          position={[5, 13, -10]}
+          bounds={[10, 2, 2]}
+          scale={1}
+          opacity={0.5}
+        />
+        <Cloud
+          position={[4, 13, 10]}
+          bounds={[10, 2, 2]}
+          scale={1}
+          opacity={0.5}
+        />
+        <Cloud
+          position={[-6, 13, -10]}
+          bounds={[10, 2, 2]}
+          scale={1}
+          opacity={0.5}
+        />
       </Clouds>
 
-      {/* <Float rotationIntensity={1}>
-        <Text
-          position-y={18}
-          rotation-y={0.48 * Math.PI}
-          curveRadius={-50}
-          fontSize={5}
-        >
-          {`    Deepan\nKameHouse`}
-        </Text>
-      </Float> */}
-      <CourageHouse />
-      {/* <KameHouse /> */}
-
+      <Model />
       <ScrollControls pages={10} damping={2}>
-        <OrbitControls
-          enableZoom={true}
-          // onChange={(e) => {
-          //   console.log("Camera Position:", e.target.object.position);
-          //   console.log("Camera Rotation:", e.target.object.rotation);
-          // }}
-        />
-        {/* <MyCameraScroll nodes={nodes} /> */}
+          <OrbitControls
+            enableZoom={true}
+            onChange={(e) => {
+              console.log("Camera Position:", e.target.object.position);
+              console.log("Camera Rotation:", e.target.object.rotation);
+            }}
+          />
+
+        <MyCameraScroll nodes={nodes} />
       </ScrollControls>
-      <ScrollHelper />
+      {/* <ScrollHelper /> */}
     </>
   );
 }
-/*
-start position
-_x
-: 
--0.030211711039026746
-_y
-: 
--0.6134007351358661
-_z
-: 
--0.01739495678852457
-*/

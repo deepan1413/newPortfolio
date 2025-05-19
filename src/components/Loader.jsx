@@ -8,9 +8,9 @@ export default function Loader() {
   return (
     <Html fullscreen>
       <div className='carte'>        
-        <img className='ship' src='./Textures/cloud.png'/>
+        <img className='ship' src='./Textures/logo.png'/>
         <p className='text'>Loading...</p> 
-        <p className='text'>to Deepan's KameHouse Space</p> 
+        <p className='text'>Deepan's  Courage theme portfolio</p> 
       </div>
     </Html>
   )

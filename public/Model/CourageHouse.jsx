@@ -4,8 +4,8 @@ Command: npx gltfjsx@6.5.3 courageHouse.glb
 */
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
-import React from "react";
-import { useGLTF } from "@react-three/drei";
+import { React, useEffect, useState } from "react";
+import { useGLTF, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 
 export default function Model(props) {
@@ -14,12 +14,64 @@ export default function Model(props) {
   const groundtexture = useLoader(TextureLoader, "./Textures/ground.jpg");
   const sofatexture = useLoader(TextureLoader, "./Textures/sofa.jpg");
   const chimneytexture = useLoader(TextureLoader, "./Textures/chimney.jpg");
+  const couragetexture = useLoader(TextureLoader, "./Textures/courage.jpeg");
+ 
+
+  couragetexture.center.set(0.5, 0.5);
+  couragetexture.repeat.set(1, 1); 
+  couragetexture.wrapS = THREE.ClampToEdgeWrapping;
+  couragetexture.wrapT = THREE.ClampToEdgeWrapping; 
+  couragetexture.rotation = Math.PI;
   groundtexture.wrapS = groundtexture.wrapT = THREE.RepeatWrapping;
   groundtexture.repeat.set(10, 10);
   groundtexture.rotation = Math.PI / 4;
   groundtexture.center.set(0.5, 0.5);
   //groundtexture
+  const cupboardtexture = useLoader(TextureLoader, "./Textures/cupboard.jpg");
+  //skills
 
+  const blenderTexture = useLoader(
+    TextureLoader,
+    "./Textures/skills/blender.png"
+  );
+  const figmaTexture = useLoader(TextureLoader, "./Textures/skills/figma.png");
+  const flutterTexture = useLoader(
+    TextureLoader,
+    "./Textures/skills/flutter.png"
+  );
+  const javaTexture = useLoader(TextureLoader, "./Textures/skills/java.png");
+  const javascriptTexture = useLoader(
+    TextureLoader,
+    "./Textures/skills/javascript.png"
+  );
+  const linuxTexture = useLoader(TextureLoader, "./Textures/skills/linux.png");
+
+  const mysqlTexture = useLoader(TextureLoader, "./Textures/skills/mysql.png");
+  mysqlTexture.wrapS = THREE.ClampToEdgeWrapping;
+  mysqlTexture.wrapT = THREE.ClampToEdgeWrapping;
+
+  const networkTexture = useLoader(
+    TextureLoader,
+    "./Textures/skills/network.png"
+  );
+  const nodejsTexture = useLoader(
+    TextureLoader,
+    "./Textures/skills/nodejs.png"
+  );
+  const pythonTexture = useLoader(
+    TextureLoader,
+    "./Textures/skills/python.jpg"
+  );
+  const reactTexture = useLoader(TextureLoader, "./Textures/skills/react.png");
+  const ThreejsTexture = useLoader(
+    TextureLoader,
+    "./Textures/skills/Threejs.png"
+  );
+
+  cupboardtexture.wrapS = cupboardtexture.wrapT = THREE.RepeatWrapping;
+  cupboardtexture.repeat.set(4, 4);
+  cupboardtexture.rotation = Math.PI / 2;
+  cupboardtexture.center.set(0.5, 0.5);
   //rooftexture
   const rooftexture = useLoader(TextureLoader, "./Textures/roof.jpg");
   rooftexture.wrapS = rooftexture.wrapT = THREE.RepeatWrapping;
@@ -44,6 +96,7 @@ export default function Model(props) {
   wallpapertexture.repeat.set(1, 1);
   wallpapertexture.center.set(1, 1);
 
+  //groundtexture
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -51,17 +104,23 @@ export default function Model(props) {
         material={nodes.atic_chair.material}
         position={[-2.855, 3.428, -1.102]}
         rotation={[0, -Math.PI / 2, 0]}
-      />
+      >
+        <meshBasicMaterial map={rooftexture} />
+      </mesh>
       <mesh
         geometry={nodes.bed.geometry}
         material={nodes.bed.material}
         position={[-1.421, 2.863, -5.701]}
-      />
+      >
+        <meshStandardMaterial map={rooftexture} />
+      </mesh>
       <mesh
         geometry={nodes.bedsheets.geometry}
         material={nodes.bedsheets.material}
         position={[-1.72, 3.341, -5.786]}
-      />
+      >
+        <meshStandardMaterial map={flootmattexture} />
+      </mesh>
       <mesh
         geometry={nodes.BezierCurve.geometry}
         position={[-0.659, 4.979, -4.659]}
@@ -98,7 +157,9 @@ export default function Model(props) {
         material={nodes.computer_table.material}
         position={[-3.676, 3.37, -1.259]}
         rotation={[0, Math.PI / 2, 0]}
-      />
+      >
+        <meshStandardMaterial map={rooftexture} />
+      </mesh>
       <group position={[-3.147, 0.484, -1.856]} rotation={[0, 0.323, 0]}>
         <mesh
           geometry={nodes.Plane012.geometry}
@@ -152,8 +213,7 @@ export default function Model(props) {
           geometry={nodes.Plane002_4.geometry}
           material={nodes.Plane002_4.material}
         >
-
-          <meshBasicMaterial map={wallpapertexture}/>
+          <meshBasicMaterial map={wallpapertexture} />
         </mesh>
       </group>
       <mesh
@@ -161,7 +221,9 @@ export default function Model(props) {
         material={nodes.mat.material}
         position={[-3.04, 2.701, -1.176]}
         scale={[0.414, 0.682, 0.682]}
-      />
+      >
+        <meshStandardMaterial map={flootmattexture} />
+      </mesh>
       <mesh
         geometry={nodes.matress.geometry}
         material={nodes.matress.material}
@@ -175,7 +237,9 @@ export default function Model(props) {
         <mesh
           geometry={nodes.Plane034.geometry}
           material={nodes.Plane034.material}
-        />
+        >
+          <meshBasicMaterial color={"#8B5A2B"} />
+        </mesh>
         <mesh
           geometry={nodes.Plane034_1.geometry}
           material={nodes.Plane034_1.material}
@@ -187,12 +251,20 @@ export default function Model(props) {
         position={[-2.131, 4.974, -6.995]}
         rotation={[Math.PI / 2, 0, 0]}
         scale={[0.422, 0.422, 0.265]}
-      />
+      >
+        <meshBasicMaterial color={"#8B5A2B"} />
+      </mesh>
       <group position={[-3.789, 3.346, -1.165]} scale={0.199}>
         <mesh
           geometry={nodes.Plane029.geometry}
           material={nodes.Plane029.material}
-        />
+        >
+          <meshStandardMaterial
+            color={"#8b7d6b"}
+            roughness={0.8}
+            metalness={0.1}
+          />
+        </mesh>
         <mesh
           geometry={nodes.Plane029_1.geometry}
           material={nodes.Plane029_1.material}
@@ -202,7 +274,9 @@ export default function Model(props) {
         geometry={nodes.pillow.geometry}
         material={nodes.pillow.material}
         position={[-0.465, 3.221, -5.679]}
-      />
+      >
+        <meshStandardMaterial map={flootmattexture} />
+      </mesh>
       <group position={[-2.425, 0.146, 0.96]}>
         <mesh
           geometry={nodes.Cube001.geometry}
@@ -238,7 +312,7 @@ export default function Model(props) {
         position={[-2.769, 0.661, -3.555]}
         rotation={[0, -0.753, 0]}
       >
-        <meshBasicMaterial map={rooftexture}/>
+        <meshBasicMaterial map={rooftexture} />
       </mesh>
       <mesh
         geometry={nodes.roof.geometry}
@@ -374,14 +448,20 @@ export default function Model(props) {
         material={nodes.pcScreen.material}
         position={[-3.789, 3.346, -1.165]}
         scale={0.199}
-      />
+      >
+
+        <meshBasicMaterial map={wallpapertexture}/>
+      </mesh>
       <mesh
         geometry={nodes.mirror1Scene.geometry}
         material={nodes.mirror1Scene.material}
         position={[-0.278, 3.888, -5.662]}
         rotation={[0, 0, Math.PI / 2]}
-        scale={[0.23, 0.536, 0.353]}
-      />
+        scale={[0.23, 1.536, 0.353]}
+      >
+        <planeGeometry args={[0.28, 0.384, 2.5]} />
+        <meshBasicMaterial map={couragetexture} />
+      </mesh>
       <mesh
         geometry={nodes.mirror2Scene.geometry}
         material={nodes.mirror2Scene.material}
@@ -395,7 +475,7 @@ export default function Model(props) {
         position={[-0.239, 0.833, -2.077]}
         rotation={[-Math.PI, 0.087, -Math.PI]}
       >
-        <meshStandardMaterial map={rooftexture} />
+        <meshStandardMaterial color={"red"} />
       </mesh>
       <mesh
         geometry={nodes.window.geometry}
@@ -443,7 +523,9 @@ export default function Model(props) {
         position={[-2.131, 4.23, -4.469]}
         rotation={[Math.PI / 2, 0, 3.136]}
         scale={[0.422, 0.422, 0.265]}
-      />
+      >
+        <meshBasicMaterial color={"#8B5A2B"} />
+      </mesh>
       <mesh
         geometry={nodes.mirror3Scene.geometry}
         material={nodes.mirror3Scene.material}
@@ -457,7 +539,9 @@ export default function Model(props) {
         position={[-2.131, 4.468, -0.069]}
         rotation={[Math.PI / 2, 0, 3.136]}
         scale={[0.422, 0.422, 0.265]}
-      />
+      >
+        <meshBasicMaterial color={"#8B5A2B"} />
+      </mesh>
       <mesh
         geometry={nodes.mirror4Scene.geometry}
         material={nodes.mirror4Scene.material}
@@ -481,187 +565,254 @@ export default function Model(props) {
         geometry={nodes.shelfDoorRight.geometry}
         material={nodes.shelfDoorRight.material}
         position={[-2.393, 4.103, -6.612]}
-        rotation={[0, -0.021, 0]}
-      />
+        rotation={[0, 2, 0]}
+      >
+        <meshStandardMaterial map={cupboardtexture} />
+      </mesh>
       <mesh
         geometry={nodes.shelfBody.geometry}
         material={nodes.shelfBody.material}
         position={[-2.388, 4.112, -6.787]}
-      />
+      >
+        <meshStandardMaterial map={cupboardtexture} />
+      </mesh>
       <mesh
         geometry={nodes.shelfDoorLeft.geometry}
         material={nodes.shelfDoorLeft.material}
         position={[-3.148, 4.112, -6.612]}
-        rotation={[0, -0.009, 0]}
-      />
+        rotation={[0, -2, 0]} //x,777,x
+      >
+        <meshStandardMaterial map={cupboardtexture} />
+      </mesh>
       <mesh
         geometry={nodes.pictureFrame1.geometry}
         material={nodes.pictureFrame1.material}
         position={[-3.032, 4.305, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <meshBasicMaterial color={"#FFD700"} />
+      </mesh>
       <mesh
         geometry={nodes.pictureScene1.geometry}
         material={nodes.pictureScene1.material}
         position={[-3.032, 4.305, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <planeGeometry args={[0.28, 0.384, 2.5]} />
+        <meshBasicMaterial map={flutterTexture} />
+      </mesh>
       <mesh
         geometry={nodes.pictureFrame2.geometry}
         material={nodes.pictureFrame2.material}
         position={[-2.846, 4.305, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <meshBasicMaterial color={"#FFD700"} />
+      </mesh>
+
       <mesh
         geometry={nodes.pictureScene2.geometry}
-        material={nodes.pictureScene2.material}
         position={[-2.846, 4.305, -6.764]}
         rotation={[-0.288, 0, 0]}
-        scale={[0.418, 0.354, 0.04]}
-      />
+        scale={[0.418, 0.354, 1.04]}
+        // scale={[7, 1, 4]}
+      >
+        <planeGeometry args={[0.218, 0.354, 2.5]} />
+        <meshBasicMaterial map={reactTexture} />
+      </mesh>
       <mesh
         geometry={nodes.pictureFrame4.geometry}
         material={nodes.pictureFrame4.material}
         position={[-2.665, 4.305, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <meshBasicMaterial color={"#FFD700"} />
+      </mesh>
       <mesh
         geometry={nodes.pictureFrame3.geometry}
         material={nodes.pictureFrame3.material}
         position={[-2.49, 4.305, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <meshBasicMaterial color={"#FFD700"} />
+      </mesh>
       <mesh
         geometry={nodes.pictureScene3.geometry}
         material={nodes.pictureScene3.material}
         position={[-2.665, 4.305, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <planeGeometry args={[0.28, 0.384, 2.5]} />
+        <meshBasicMaterial map={ThreejsTexture} />
+      </mesh>
       <mesh
         geometry={nodes.pictureScene4.geometry}
         material={nodes.pictureScene4.material}
         position={[-2.49, 4.305, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <planeGeometry args={[0.28, 0.384, 2.5]} />
+        <meshBasicMaterial map={figmaTexture} />
+      </mesh>
       <mesh
         geometry={nodes.pictureFrame8.geometry}
         material={nodes.pictureFrame8.material}
         position={[-3.032, 4.117, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <meshBasicMaterial color={"#FFD700"} />
+      </mesh>
       <mesh
         geometry={nodes.pictureFrame7.geometry}
         material={nodes.pictureFrame7.material}
         position={[-2.846, 4.117, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <meshBasicMaterial color={"#FFD700"} />
+      </mesh>
       <mesh
         geometry={nodes.pictureFrame6.geometry}
         material={nodes.pictureFrame6.material}
         position={[-2.49, 4.117, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <meshBasicMaterial color={"#FFD700"} />
+      </mesh>
       <mesh
         geometry={nodes.pictureFrame5.geometry}
         material={nodes.pictureFrame5.material}
         position={[-2.665, 4.117, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <meshBasicMaterial color={"#FFD700"} />
+      </mesh>
       <mesh
         geometry={nodes.pictureScene8.geometry}
         material={nodes.pictureScene8.material}
         position={[-3.032, 4.117, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <planeGeometry args={[0.28, 0.384, 2.5]} />
+        <meshBasicMaterial map={blenderTexture} />
+      </mesh>
       <mesh
         geometry={nodes.pictureScene7.geometry}
         material={nodes.pictureScene7.material}
         position={[-2.846, 4.117, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <planeGeometry args={[0.28, 0.384, 2.5]} />
+        <meshBasicMaterial map={javaTexture} />
+      </mesh>
       <mesh
         geometry={nodes.pictureScene6.geometry}
         material={nodes.pictureScene6.material}
         position={[-2.49, 4.117, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <planeGeometry args={[0.28, 0.384, 2.5]} />
+        <meshBasicMaterial map={javascriptTexture} />
+      </mesh>
       <mesh
         geometry={nodes.pictureScene5.geometry}
         material={nodes.pictureScene5.material}
         position={[-2.665, 4.117, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <planeGeometry args={[0.28, 0.384, 2.5]} />
+        <meshBasicMaterial map={pythonTexture} />
+      </mesh>
       <mesh
         geometry={nodes.pictureFrame12.geometry}
         material={nodes.pictureFrame12.material}
         position={[-2.665, 3.903, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <meshBasicMaterial color={"#FFD700"} />
+      </mesh>
       <mesh
         geometry={nodes.pictureFrame11.geometry}
         material={nodes.pictureFrame11.material}
         position={[-2.49, 3.903, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <meshBasicMaterial color={"#FFD700"} />
+      </mesh>
       <mesh
         geometry={nodes.pictureFrame10.geometry}
         material={nodes.pictureFrame10.material}
         position={[-2.846, 3.903, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <meshBasicMaterial color={"#FFD700"} />
+      </mesh>
       <mesh
         geometry={nodes.pictureFrame9.geometry}
         material={nodes.pictureFrame9.material}
         position={[-3.032, 3.903, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <meshBasicMaterial color={"#FFD700"} />
+      </mesh>
       <mesh
         geometry={nodes.pictureScene12.geometry}
         material={nodes.pictureScene12.material}
         position={[-2.665, 3.903, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <planeGeometry args={[0.28, 0.384, 2.5]} />
+        <meshBasicMaterial map={networkTexture} />
+      </mesh>
       <mesh
         geometry={nodes.pictureScene11.geometry}
         material={nodes.pictureScene11.material}
         position={[-2.49, 3.903, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <planeGeometry args={[0.28, 0.384, 2.5]} />
+        <meshBasicMaterial map={nodejsTexture} />
+      </mesh>
       <mesh
         geometry={nodes.pictureScene10.geometry}
         material={nodes.pictureScene10.material}
         position={[-2.846, 3.903, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <planeGeometry args={[0.28, 0.384, 2.5]} />
+        <meshBasicMaterial map={linuxTexture} />
+      </mesh>
       <mesh
         geometry={nodes.pictureScene9.geometry}
         material={nodes.pictureScene9.material}
         position={[-3.032, 3.903, -6.764]}
         rotation={[-0.288, 0, 0]}
         scale={[0.418, 0.354, 0.04]}
-      />
+      >
+        <planeGeometry args={[0.28, 0.384, 2.5]} />
+        <meshBasicMaterial map={mysqlTexture} />
+      </mesh>
       <mesh
         geometry={nodes.frontDoor.geometry}
         material={nodes.frontDoor.material}

@@ -1,0 +1,41 @@
+[
+  {
+    "name": "portfolio",
+    "url": "https://github.com/deepan1413/newPortfolio",
+    "description": "A personal portfolio website showcasing skills and projects, built with HTML, CSS, and JavaScript."
+  },
+  {
+    "name": "Traffic-surveillance-system-with-vehicle-counting-and-speed-detections",
+    "url": "https://github.com/deepan1413/Traffic-surveillance-system-with-vehicle-counting-and-speed-detection",
+    "description": "An AI-powered traffic surveillance system using YOLOv8 and SORT for vehicle counting and speed detection."
+  },
+  {
+    "name": "smartPlantHealth",
+    "url": "https://github.com/deepan1413/smartPlantHealth",
+    "description": "A plant health monitoring system with disease detection, care tips, and environmental recommendations."
+  },
+  {
+    "name": "College events registration",
+    "url": "https://github.com/deepan1413/VTU-Event",
+    "description": "A web-based event registration system for college events with admin management and student enrollment."
+  },{
+    "name": "portfolio",
+    "url": "https://github.com/deepan1413/newPortfolio",
+    "description": "A personal portfolio website showcasing skills and projects, built with HTML, CSS, and JavaScript."
+  },
+  {
+    "name": "Traffic-surveillance-system-with-vehicle-counting-and-speed-detections",
+    "url": "https://github.com/deepan1413/Traffic-surveillance-system-with-vehicle-counting-and-speed-detection",
+    "description": "An AI-powered traffic surveillance system using YOLOv8 and SORT for vehicle counting and speed detection."
+  },
+  {
+    "name": "smartPlantHealth",
+    "url": "https://github.com/deepan1413/smartPlantHealth",
+    "description": "A plant health monitoring system with disease detection, care tips, and environmental recommendations."
+  },
+  {
+    "name": "College events registration",
+    "url": "https://github.com/deepan1413/VTU-Event",
+    "description": "A web-based event registration system for college events with admin management and student enrollment."
+  }
+]

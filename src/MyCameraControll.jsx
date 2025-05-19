@@ -9,200 +9,68 @@ import {
   RoundedBox,
 } from "@react-three/drei";
 import gsap from "gsap";
-import TVScreen from "./Model/TVScreen.jsx";
-
 
 export default function MyCameraScroll(props) {
-  const DoorTexture = useTexture("/Textures/DoorBaked.jpg");
   const [progress, setProgress] = useState(1);
   const [opacity, setOpacity] = useState(0);
   const { camera } = useThree();
   const tlRef = useRef();
-  const reactTextRef = useRef();
-  const doorRef = useRef();
-
+  const frontDoorRef = useRef();
+  const windmillLeaf = useRef();
+  const introTextRef = useRef();
   const welcomeTextRef = useRef();
-  const aboutTextRef = useRef();
+  const collegeTextRef = useRef();
   const skillTextRef = useRef();
-  const projectTextRef = useRef();
-  const byeTextRef = useRef();
-
+  const languagesTextRef = useRef();
+  const projectsTextRef = useRef();
+  const hobbiesTextRef = useRef();
+  const quotesTextRef = useRef();
   const scroll = useScroll();
+
+  // start position: [ -23.234795944690745, 3.2570048661493995, 26.918081948657154],
 
   useFrame((state, delta) => {
     tlRef.current.seek(scroll.offset * tlRef.current.duration());
   });
-
-  useLayoutEffect(() => {
-    // initial position & rotation
-    camera.rotation.set(-0.030211711039026746,-0.6134007351358661
-, -0.01739495678852457);
-    camera.position.set( -23.234795944690745,  3.2570048661493995,  26.918081948657154);
-  }, [camera]);
+  useFrame(() => {
+    if (windmillLeaf.current) {
+      windmillLeaf.current.rotation.z -= 0.02;
+    }
+  });
 
   useLayoutEffect(() => {
     tlRef.current = gsap.timeline({ paused: true });
-
-    // Move to first position
+    //first position
+    // -2.939923478216972, y: 1.1872855480563205, z: 4.116440804404311,
+    //r -0.012440764314818395, _y: -0.2958413038911087, _z: -0.003627210232000859
     tlRef.current.to(camera.position, {
-      duration: 2,
-      x: 7.7,
-      y: 2,
-      z: -2.5,
+      duration: 1,
+      x: -2.939923478216972,
+      y: 1.1872855480563205,
+      z: 4.116440804404311,
     });
 
-    // Open door animation
-    tlRef.current.to(doorRef.current.rotation, {
-      duration: 2,
-      y: -Math.PI / 2,
-    });
-    //welcome text visible
     tlRef.current.to(
-      welcomeTextRef.current.material,
+      camera.rotation,
       {
-        opacity: 1,
+        x: -0.012440764314818395,
+        y: -0.2958413038911087,
+        z: -0.003627210232000859,
       },
-    
+      "<"
     );
-    //middle house
-    tlRef.current.to(camera.position, {
-      duration: 2,
-      x: 2.3,
-      y: 1.6,
-      z: -2.8,
-    });
-    //welcome text !visible
 
     tlRef.current.to(welcomeTextRef.current.material, {
-      opacity: 0,
+      opacity: 1,
     });
-    //
+    //door open
     tlRef.current.to(
-      camera.rotation,
+      frontDoorRef.current.rotation,
       {
-        duration: 2,
-        x: 0,
-        y: Math.PI,
-        z: 0,
+        duration: 0.3,
+        y: -Math.PI / 2,
       },
       "<"
-    );
-    
-
-    tlRef.current.to(camera.position, {
-      duration: 2,
-      x: 3.5,
-      y: 2,
-      z: 1,
-    });
-    tlRef.current.to(camera.rotation, {
-      duration: 2,
-      z: 0,
-      y: 1.5,
-    });
-    tlRef.current.to(camera.position, {
-      duration: 2,
-      x: 3,
-      y: 3.0,
-      z: 1.2,
-    });
-
-    tlRef.current.to(
-      camera.rotation,
-      {
-        duration: 1,
-        x: -1.19,
-        y: 0.86,
-        z: 1.08,
-      },
-
-      "<"
-    );
-    tlRef.current.to(
-      skillTextRef.current.material,
-      {
-        opacity: 1,
-      },
-      "<"
-    );
-    tlRef.current.to(camera.position, {
-      duration: 2,
-      // x: 3.5,
-      // y: 3,
-      // z: 1,
-      x: 1.5,
-      y: 3.0,
-      z: 1.2,
-    });
-
-    tlRef.current.to(camera.rotation, {
-      duration: 1,
-      x: -0.28,
-      y: 0,
-      z: 0.08,
-    });
-    tlRef.current.to(skillTextRef.current.material, {
-      opacity: 0,
-    });
-    tlRef.current.to(camera.position, {
-      duration: 1,
-      // x: 3.5,
-      // y: 3,
-      // z: 1,
-      x: 1.5,
-      y: 2.0,
-      z: -2.5,
-    });
-
-    tlRef.current.to(camera.rotation, {
-      duration: 1,
-      x: 0.1,
-      y: -1.5,
-      z: 0.08,
-    });
-    //back
-    tlRef.current.to(
-      camera.position,
-      {
-        duration: 2,
-        // x: 3.5,
-        // y: 3,
-        // z: 1,
-        x: 10.5,
-        y: 2.0,
-        z: -2.5,
-      },
-      "<"
-    );
-    tlRef.current.to(camera.position, {
-      duration: 2,
-      // x: 3.5,
-      // y: 3,
-      // z: 1,
-      x: -5,
-      y: 30.0,
-      z: 12.5,
-    });
-    tlRef.current.to(
-      { value: 1 },
-      {
-        duration: 2,
-        value: 10,
-        onUpdate: function () {
-          setProgress(this.targets()[0].value);
-        },
-      },
-      "<"
-    );
-    tlRef.current.to(
-      { value: -1 },
-      {
-        value: 1,
-        onUpdate: function () {
-          setOpacity(this.targets()[0].value);
-        },
-      },
-      "<60%"
     );
   }, [camera]);
 
@@ -216,44 +84,45 @@ export default function MyCameraScroll(props) {
 
   return (
     <>
-      <group ref={doorRef} position={[3.976, 0.55, -1.95]}>
-        <mesh geometry={props.nodes.DoorMerge.geometry}>
-          <meshBasicMaterial map={DoorTexture} map-flipY={false} />
+      <group
+        ref={frontDoorRef}
+        position={[-3.051, 1.155, -0.123]}
+        scale={[2.27, 2.27, 3.446]}
+      >
+        <mesh geometry={props.nodes.frontDoor.geometry}>
+          <meshStandardMaterial color="#2a9f7c" />
         </mesh>
       </group>
-     
+      <mesh
+        ref={windmillLeaf}
+        geometry={props.nodes.windmillLeaf.geometry}
+        material={props.nodes.windmillLeaf.material}
+        position={[-5.451, 11.01, -19.27]}
+      ></mesh>
+      //cube
+      <mesh
+        position={[-20.969403340083357, 2.939446891699828, 24.293568958663037]}
+        rotation={[-0.1, Math.PI / 3.8, 0]}
+      >
+        <boxGeometry args={[1, 1, 1]} />
+        <meshStandardMaterial color="orange" />
+      </mesh>
       <Text
-        position={[2.8, 2, -2.3]}
+        // -23.234795944690745, 3.2570048661493995, 26.918081948657154
+        position={[-20.969403340083357, 2.939446891699828, 24.293568958663037]}
+        //l-r  , t-down , f-b
         ref={welcomeTextRef}
         font="./fonts/Bangers.ttf"
-        fontSize={0.1}
-        rotation={[0, Math.PI / 2, 0]}
-        // rotation-z={900}
+        fontSize={0.2}
+        rotation={[-0.1, Math.PI / 3.8, 0]}
+        rotation-y={6}
         textAlign="center"
         anchorX="center"
         anchorY="middle"
         color="#2d1d04"
-        material-opacity={0}
+        material-opacity={1}
       >
-        {"Hi, welcome\nThis is my portfolio house"}
-      </Text>
-      <Text
-        position={[2, 2.1, 1]}
-        ref={skillTextRef}
-        font="./fonts/Bangers.ttf"
-        fontSize={0.1}
-        rotation={[0, Math.PI / 3, 0]}
-        // rotation-x={ 9000000}
-        // rotation-z={Math.PI}
-        textAlign="left"
-        anchorX="center"
-        anchorY="middle"
-        color="#2d1d04"
-        material-opacity={0}
-      >
-        {
-          "I have some Experience in\nFlutter\nreact\nnode.js\nJava\nThree.js\nHTML & CSS\nIOT"
-        }
+        {"Hi, welcome\nThis is my courage themed portfolio"}
       </Text>
     </>
   );
