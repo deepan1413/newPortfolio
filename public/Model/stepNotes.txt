@@ -1,2 +1,7 @@
 ScrollHelper
 figma link
+
+git add .
+git commit -m "Initial"
+git branch -M main
+git push -u origin main

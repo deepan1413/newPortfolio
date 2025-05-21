@@ -2,7 +2,11 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
-
+import projects from "./projects.json";
+import {
+  CSS2DRenderer,
+  CSS2DObject,
+} from "three/examples/jsm/renderers/CSS2DRenderer";
 import {
   useScroll,
   Text,
@@ -10,11 +14,14 @@ import {
   useTexture,
   Billboard,
   RoundedBox,
+  Html,
 } from "@react-three/drei";
+
 import gsap from "gsap";
 import * as THREE from "three";
 
 import { Vector3, Euler } from "three";
+import Label from "../public/Model/ProjectCard";
 export default function MyCameraScroll(props) {
   const video = document.createElement("video");
 
@@ -107,7 +114,9 @@ export default function MyCameraScroll(props) {
     });
     tlRef.current.to(camera.position, {
       duration: 2,
-    x: -12.713621, y: 2.18403, z: 13.097359
+      x: -12.713621,
+      y: 2.18403,
+      z: 13.097359,
     });
     tlRef.current.to(introTextRef.current.material, {
       duration: 2,
@@ -155,6 +164,7 @@ export default function MyCameraScroll(props) {
     );
 
     tlRef.current.to(showTextRef.current.material, {
+      duration: 2,
       opacity: 1,
     });
 
@@ -167,6 +177,7 @@ export default function MyCameraScroll(props) {
     tlRef.current.to(
       camera.rotation,
       {
+        duration: 2,
         x: 0,
         y: 0,
         z: 0,
@@ -217,9 +228,13 @@ export default function MyCameraScroll(props) {
       },
       "<"
     );
-    tlRef.current.to(languagesTextRef.current.material, {
-      opacity: 1,
-    });
+    tlRef.current.to(
+      languagesTextRef.current.material,
+      {
+        opacity: 1,
+      },
+      "<"
+    );
     tlRef.current.to(camera.position, {
       duration: 2,
       x: -2.78,
@@ -329,6 +344,17 @@ export default function MyCameraScroll(props) {
       >
         <meshPhysicalMaterial map={TVScreen} />
       </mesh>
+      <group>
+        <mesh
+          geometry={props.nodes.PhotoFrameScene2.geometry}
+          material={props.nodes.PhotoFrameScene2.material}
+          position={[-1.458, 3.923, -4.482]}
+          rotation={[1.598, 0, -3.129]}
+          scale={[0.446, 0.091, 0.309]}
+        >
+          <Label text="Hello---------------World" position={[1, 0.1, 0]} />
+        </mesh>
+      </group>
       <Text
         // -23.234795944690745, 3.2570048661493995, 26.918081948657154
         position={[-17.969403340083357, 3, 21.293568958663037]}
@@ -354,7 +380,6 @@ export default function MyCameraScroll(props) {
         font="./fonts/Bangers.ttf"
         fontSize={0.3}
         rotation={[0, -7, 0]}
-  
         textAlign="center"
         anchorX="center"
         anchorY="middle"
@@ -413,7 +438,7 @@ export default function MyCameraScroll(props) {
       </Text>
       <Text
         // -23.234795944690745, 3.2570048661493995, 26.918081948657154
-        position={[-3, 4.85, -6.7]}
+        position={[-3, 5.12, -6.9]}
         //l-r  , t-down , f-b
         ref={languagesTextRef}
         font="./fonts/Bangers.ttf"

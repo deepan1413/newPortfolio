@@ -2,15 +2,18 @@ import { Analytics } from "@vercel/analytics/react";
 import { StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { Canvas } from "@react-three/fiber";
+
 import {
   Stars,
   Float,
   Text,
   ScrollControls,
   OrbitControls,
-  useGLTF,
+  useGLTF,Html
 } from "@react-three/drei";
 import "./index.css";
+import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
+
 import App from "./App.jsx";
 import Loader from "./components/Loader.jsx";
 
@@ -33,11 +36,12 @@ createRoot(document.getElementById("root")).render(
         //  position: [ -23.234795944690745, 3.2570048661493995, 26.918081948657154],
       }}
     >
-      {/* <Suspense fallback={<Loader />}> */}
+      <Suspense fallback={<Loader />}>
       {/* <Loader/> */}
       <App />
-      {/* </Suspense> */}
+      </Suspense>
       {/* <Analytics/> */}
+       
     </Canvas>
   </StrictMode>
 );

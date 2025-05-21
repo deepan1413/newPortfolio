@@ -19,6 +19,7 @@ import { Cloud, Clouds } from "@react-three/drei";
 
 import MyCameraScroll from "./MyCameraControll";
 import ScrollHelper from "./components/Scrollhelper";
+import ProjectCard from "../public/Model/ProjectCard";
 export default function App() {
   const { nodes } = useGLTF("./Model/model.glb");
 
@@ -50,16 +51,16 @@ export default function App() {
           opacity={0.5}
         />
       </Clouds>
-
+      <ProjectCard />
       <Model />
-      <ScrollControls pages={11} >
-            {/* <OrbitControls
-              // enableZoom={true}
-              onChange={(e) => {
-                console.log("Camera Position:", e.target.object.position);
-                console.log("Camera Rotation:", e.target.object.rotation);
-              }}
-            /> */}
+      <ScrollControls pages={11}>
+        {/* <OrbitControls
+          enableZoom={true}
+          onChange={(e) => {
+            console.log("Camera Position:", e.target.object.position);
+            console.log("Camera Rotation:", e.target.object.rotation);
+          }}
+        /> */}
 
         <MyCameraScroll nodes={nodes} />
       </ScrollControls>
