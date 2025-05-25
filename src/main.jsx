@@ -40,7 +40,7 @@ createRoot(document.getElementById("root")).render(
       {/* <Loader/> */}
       <App />
       </Suspense>
-      {/* <Analytics/> */}
+       <Analytics/> 
        
     </Canvas>
   </StrictMode>
