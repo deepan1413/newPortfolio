@@ -1,25 +1,33 @@
+import React from 'react';
+import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer';
+import { useThree } from '@react-three/fiber';
 import { useEffect, useRef } from 'react';
-import * as THREE from 'three';
-import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
 
-const Label = ({ position = [0, 0, 0], text = "Hello" }) => {
+const Label3D = ({ position = [0, 0, 0], text = "Hello" }) => {
   const ref = useRef();
+  const { scene } = useThree();
 
   useEffect(() => {
     const div = document.createElement('div');
-    div.className = 'label';
     div.textContent = text;
-    div.style.marginTop = '-1em';
-    const label = new CSS2DObject(div);
-    label.position.set(...position);
-    ref.current.add(label);
+    div.className = 'label3d';
+    div.style.padding = '6px 10px';
+    div.style.background = 'rgba(0, 0, 0, 0.7)';
+    div.style.color = 'white';
+    div.style.borderRadius = '4px';
+
+    const labelObject = new CSS3DObject(div);
+    labelObject.position.set(...position);
+    ref.current = labelObject;
+
+    scene.add(labelObject);
 
     return () => {
-      ref.current.remove(label);
+      scene.remove(labelObject);
     };
-  }, [position, text]);
+  }, [position, text, scene]);
 
-  return <primitive object={new THREE.Object3D()} ref={ref} />;
+  return null;
 };
 
-export default Label;
+export default Label3D;

@@ -53,7 +53,7 @@ export default function App() {
       </Clouds>
       <ProjectCard />
       <Model />
-      <ScrollControls pages={11}>
+      <ScrollControls pages={14}>
         {/* <OrbitControls
           enableZoom={true}
           onChange={(e) => {

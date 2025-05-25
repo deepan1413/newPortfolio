@@ -22,6 +22,7 @@ import * as THREE from "three";
 
 import { Vector3, Euler } from "three";
 import Label from "../public/Model/ProjectCard";
+import Label3D from "../public/Model/ProjectCard";
 export default function MyCameraScroll(props) {
   const video = document.createElement("video");
 
@@ -74,6 +75,7 @@ export default function MyCameraScroll(props) {
   const frontDoorRef = useRef();
   const shelfLeftDoorRef = useRef();
   const shelfRigtDoorRef = useRef();
+  const bedroomDoorRef = useRef();
   const windmillLeaf = useRef();
   const introTextRef = useRef();
   const welcomeTextRef = useRef();
@@ -85,8 +87,8 @@ export default function MyCameraScroll(props) {
   const leftskillTextRef = useRef();
   const languagesTextRef = useRef();
   const projectsTextRef = useRef();
-  const hobbiesTextRef = useRef();
-  const quotesTextRef = useRef();
+  const messageTextRef = useRef();
+
   const scroll = useScroll();
 
   // start position: [ -23.234795944690745, 3.2570048661493995, 26.918081948657154],
@@ -288,6 +290,62 @@ export default function MyCameraScroll(props) {
       },
       "<"
     );
+    tlRef.current.to(projectsTextRef.current.material, {
+      duration: 2,
+      opacity: 1,
+    });
+    tlRef.current.to(camera.position, {
+      duration: 2,
+      x: -3.6,
+      y: 3.5,
+      z: -6.6,
+    });
+    tlRef.current.to(
+      bedroomDoorRef.current.rotation,
+      {
+        duration: 2,
+        z: 1.5,
+      },
+      "<"
+    );
+    tlRef.current.to(camera.position, {
+      duration: 2,
+      x: -3,
+      y: 3.75,
+      z: -1.1,
+    });
+    tlRef.current.to(
+      camera.rotation,
+
+      {
+        duration: 2,
+        x: 0,
+        y: -4.9,
+        z: 0,
+      },
+      "<"
+    );
+    tlRef.current.to(camera.position, {
+      duration: 2,
+      x: -2.5,
+      y: 4.5,
+      z: -1.5,
+    });
+    tlRef.current.to(
+      camera.rotation,
+
+      {
+        duration: 2,
+        x: 0,
+        y: -3,
+        z: 0,
+      },
+      "<"
+    );
+    tlRef.current.to(messageTextRef.current.material, {
+      duration: 2,
+      opacity: 1,
+    });
   }, [camera]);
 
   useThree(({ gl }) => {
@@ -351,10 +409,26 @@ export default function MyCameraScroll(props) {
           position={[-1.458, 3.923, -4.482]}
           rotation={[1.598, 0, -3.129]}
           scale={[0.446, 0.091, 0.309]}
+          //project
         >
-          <Label text="Hello---------------World" position={[1, 0.1, 0]} />
+          <Html position={[1, 0.1, 0]} transform occlude distanceFactor={1.5}>
+            <div
+              style={{ color: "white", background: "black", padding: "4px" }}
+            >
+              projects
+            </div>
+          </Html>
         </mesh>
       </group>
+      <mesh
+        ref={bedroomDoorRef}
+        geometry={props.nodes.bedroomDoor.geometry}
+        material={props.nodes.bedroomDoor.material}
+        position={[-2.835, 3.598, -4.444]}
+        rotation={[Math.PI / 2, 0, 0]}
+      >
+        <meshStandardMaterial color="#2a9f7c" />
+      </mesh>
       <Text
         // -23.234795944690745, 3.2570048661493995, 26.918081948657154
         position={[-17.969403340083357, 3, 21.293568958663037]}
@@ -370,6 +444,36 @@ export default function MyCameraScroll(props) {
         material-opacity={0}
       >
         {"Hi, welcome\nThis is my courage themed portfolio"}
+      </Text>
+      <Text
+        position={[-2.3, 4.6, -1]}
+        //l-r  , t-down , f-b
+        ref={messageTextRef}
+        font="./fonts/Bangers.ttf"
+        fontSize={0.08}
+        rotation={[0, 3, 0]}
+        textAlign="center"
+        anchorX="center"
+        anchorY="middle"
+        color="#2d1d04"
+        material-opacity={0}
+      >
+        {"Send message"}
+      </Text>
+      <Text
+        position={[-1.358, 4.25, -4.582]}
+        //l-r  , t-down , f-b
+        ref={projectsTextRef}
+        font="./fonts/Bangers.ttf"
+        fontSize={0.08}
+        rotation={[0, 3, 0]}
+        textAlign="center"
+        anchorX="center"
+        anchorY="middle"
+        color="#2d1d04"
+        material-opacity={0}
+      >
+        {"this are my projects"}
       </Text>
       <CameraLogger camera={camera} />
       <Text

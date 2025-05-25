@@ -300,8 +300,6 @@ export default function Model(props) {
 
   //
 
-  
-
   //
 
   //groundtexture
@@ -1109,9 +1107,9 @@ export default function Model(props) {
         scale={[0.446, 0.091, 0.309]}
       >
         //project
-         <ProjectCard />
-        
+        <ProjectCard text="hey " />
       </mesh> */}
+      {/* <      ProjectCards /> */}
       <mesh
         geometry={nodes.PhotoFrame3.geometry}
         material={nodes.PhotoFrame3.material}
@@ -1295,14 +1293,14 @@ export default function Model(props) {
           <meshStandardMaterial color="#2a9f7c" />
         </mesh>
       </group>
-      <mesh
+      {/* <mesh
         geometry={nodes.bedroomDoor.geometry}
         material={nodes.bedroomDoor.material}
         position={[-2.835, 3.598, -4.444]}
         rotation={[Math.PI / 2, 0, 0.446]}
       >
         <meshStandardMaterial color="#2a9f7c" />
-      </mesh>
+      </mesh> */}
       <group position={[-2.411, -0.001, -3.529]} scale={[2.27, 2.27, 3.446]}>
         <mesh
           geometry={nodes.Plane022.geometry}
