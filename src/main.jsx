@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import { Canvas } from "@react-three/fiber";
 
 import "./index.css";
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 import App from "./App.jsx";
 import Loader from "./components/Loader.jsx";
@@ -28,11 +29,11 @@ createRoot(document.getElementById("root")).render(
       }}
     >
       <Suspense fallback={<Loader />}>
-      {/* <Loader/> */}
-      <App />
+        {/* <Loader/> */}
+        <App />
       </Suspense>
-       <Analytics/> 
-       
+      <Analytics />
+      <SpeedInsights />
     </Canvas>
   </StrictMode>
 );
