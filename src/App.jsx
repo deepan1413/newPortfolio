@@ -1,4 +1,3 @@
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   Stars,
   Float,
@@ -8,18 +7,13 @@ import {
   useGLTF,
   Sky,
 } from "@react-three/drei";
-import { useEffect } from "react";
 import { Environment } from "@react-three/drei";
-import * as THREE from "three";
-// import KameHouse from "../public/Model/KameHouse";
-import CourageHouse from "../public/Model/CourageHouse";
 import Model from "../public/Model/Model";
-import Ocean from "../public/Model/Ocean";
+
 import { Cloud, Clouds } from "@react-three/drei";
 
 import MyCameraScroll from "./MyCameraControll";
 import ScrollHelper from "./components/Scrollhelper";
-import ProjectCard from "../public/Model/ProjectCard";
 export default function App() {
   const { nodes } = useGLTF("./Model/model.glb");
 
@@ -31,7 +25,6 @@ export default function App() {
       <directionalLight position={[10, 2, 3]} intensity={5} />
       <directionalLight position={[-10, -2, -3]} intensity={5} />
       <Clouds>
-        {/* <Cloud position={[0, 10, 0]} scale={1} opacity={0.5} /> */}
         <Cloud
           position={[5, 13, -10]}
           bounds={[10, 2, 2]}
@@ -51,7 +44,7 @@ export default function App() {
           opacity={0.5}
         />
       </Clouds>
-      <ProjectCard />
+     
       <Model />
       <ScrollControls pages={14}>
         {/* <OrbitControls
@@ -64,7 +57,7 @@ export default function App() {
 
         <MyCameraScroll nodes={nodes} />
       </ScrollControls>
-      {/* <ScrollHelper /> */}
+      <ScrollHelper />
     </>
   );
 }

@@ -2,18 +2,11 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
-import projects from "./projects.json";
-import {
-  CSS2DRenderer,
-  CSS2DObject,
-} from "three/examples/jsm/renderers/CSS2DRenderer";
+
 import {
   useScroll,
   Text,
-  Text3D,
-  useTexture,
-  Billboard,
-  RoundedBox,
+ 
   Html,
 } from "@react-three/drei";
 
@@ -21,8 +14,6 @@ import gsap from "gsap";
 import * as THREE from "three";
 
 import { Vector3, Euler } from "three";
-import Label from "../public/Model/ProjectCard";
-import Label3D from "../public/Model/ProjectCard";
 export default function MyCameraScroll(props) {
   const video = document.createElement("video");
 
@@ -111,7 +102,7 @@ export default function MyCameraScroll(props) {
       z: 23.78,
     });
     tlRef.current.to(welcomeTextRef.current.material, {
-      duration: 2,
+      duration: 1,
       opacity: 1,
     });
     tlRef.current.to(camera.position, {
@@ -121,7 +112,7 @@ export default function MyCameraScroll(props) {
       z: 13.097359,
     });
     tlRef.current.to(introTextRef.current.material, {
-      duration: 2,
+      duration: 1,
       opacity: 1,
     });
 
@@ -189,7 +180,7 @@ export default function MyCameraScroll(props) {
     tlRef.current.to(
       [collegeTextRef.current.material, diplomaTextRef.current.material],
       { duration: 2, opacity: 1 },
-      "<"
+      
     );
     tlRef.current.to(camera.position, {
       duration: 2,
