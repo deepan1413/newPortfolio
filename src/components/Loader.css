@@ -1,50 +1,66 @@
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body, html {
-    height: 100%;
-    font-family: 'Arial', sans-serif;
-  }
-    
-  .carte {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;  
-    
-    background-color: white;
-  
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  
-  .ship {
-  
-    width: 20%;  
-    animation: tanguer 4s ease-in-out infinite; 
-  
-  }
-  
-  .text {
-    margin-top: 20px; 
-    font-family: MedievalSharp;
-    font-size: 3vh;
-  }
-  
-  @keyframes tanguer {
-    0% {
-      transform: rotate(-8deg);
-    }
-    50% {
-      transform: rotate(7deg); 
-    }
-    100% {
-      transform: rotate(-7deg); 
-    }
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+}
+
+.carte {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;  
+  height: 100%;
+  width: 100%;
+  background: white;
+  text-align: center;
+  position: relative;
+  z-index: 9999; 
+  padding: 20px;
+}
+
+.ship {
+  width: 120px;
+  max-width: 40%;
+  margin-bottom: 20px;
+  animation: tanguer 4s ease-in-out infinite; 
+}
+.title {
+  font-size: 2.5vh;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 2vh;
+  color: #666;
+  margin-bottom: 20px;
+  font-family: 'MedievalSharp', cursive;
+}
+
+.progress-container {
+  width: 60%;
+  max-width: 400px;
+  height: 12px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: #fe93d4;
+  transition: width 0.4s ease;
+}
+
+@keyframes tanguer {
+  0% { transform: rotate(-8deg); }
+  50% { transform: rotate(7deg); }
+  100% { transform: rotate(-7deg); }
+}
