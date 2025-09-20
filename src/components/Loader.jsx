@@ -6,7 +6,7 @@ export default function Loader() {
   const { progress } = useProgress();
   const [displayProgress, setDisplayProgress] = useState(0);
 
-  // 🔹 Prevent progress from going backward
+  
   useEffect(() => {
     if (progress > displayProgress) {
       setDisplayProgress(progress);
@@ -21,7 +21,6 @@ export default function Loader() {
         <p className="title">Loading... {Math.floor(displayProgress)}%</p>
         <p className="subtitle">Deepan's Courage Theme Portfolio</p>
 
-        {/* Linear Progress Bar */}
         <div className="progress-container">
           <div
             className="progress-bar"
