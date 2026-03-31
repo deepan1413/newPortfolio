@@ -12,8 +12,12 @@ export default function Model(props) {
   const [projects, setProjects] = useState([]);
   useEffect(() => {
     fetch("/Model/projects.json")
-      .then((res) => res.json())
-      .then(setProjects);
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then(setProjects)
+      .catch((err) => console.warn("Failed to load projects:", err));
   }, []);
   const handleClick = (url) => {
     // if (props.opacity > 0.9) {
