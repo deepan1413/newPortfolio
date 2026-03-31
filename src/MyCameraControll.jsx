@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, useMemo } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
@@ -15,29 +15,27 @@ import * as THREE from "three";
 
 import { Vector3, Euler } from "three";
 export default function MyCameraScroll(props) {
-  const video = document.createElement("video");
+  const TVScreen = useMemo(() => {
+    const vid = document.createElement("video");
+    vid.src = "./tv.mp4";
+    vid.muted = true;
+    vid.volume = 0;
+    vid.loop = true;
+    vid.playsInline = true;
+    vid.autoplay = true;
+    vid.preload = "auto";
+    vid.play().catch((err) => {
+      console.warn("Autoplay failed:", err);
+    });
 
-  video.src = "./tv.mp4";
-  video.muted = true;
-  video.volume = 0;
-  video.loop = true;
-  video.playsInline = true;
-  video.autoplay = true;
-  video.muted = true;
-  video.autoplay = true;
-  video.playsInline = true;
-  video.loop = true;
-  video.preload = "auto";
-  video.play().catch((err) => {
-    console.warn("Autoplay failed:", err);
-  });
-
-  const TVScreen = new THREE.VideoTexture(video);
-  TVScreen.center.set(0.65, 0.32);
-  TVScreen.rotation = Math.PI / 2;
-  TVScreen.repeat.set(2, 1);
-  TVScreen.wrapS = THREE.ClampToEdgeWrapping;
-  TVScreen.wrapT = THREE.ClampToEdgeWrapping;
+    const tex = new THREE.VideoTexture(vid);
+    tex.center.set(0.65, 0.32);
+    tex.rotation = Math.PI / 2;
+    tex.repeat.set(2, 1);
+    tex.wrapS = THREE.ClampToEdgeWrapping;
+    tex.wrapT = THREE.ClampToEdgeWrapping;
+    return tex;
+  }, []);
   const CameraLogger = ({ camera }) => {
     const prevPos = useRef(new Vector3());
     const prevRot = useRef(new Euler());

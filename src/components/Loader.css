@@ -64,3 +64,12 @@ body, html {
   50% { transform: rotate(7deg); }
   100% { transform: rotate(-7deg); }
 }
+
+.carte-fade-out {
+  animation: fadeOut 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
