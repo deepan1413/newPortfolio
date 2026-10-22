@@ -277,7 +277,7 @@ export default function Model(props) {
   const linkedinLink = "https://www.linkedin.com/in/deepan-l-3aabb425b";
   const cubeSize = [0.02, 0.086, 0.02];
   const whatsappLink =
-    "https://wa.me/919585582166?text=hello%20from%20you%20link";
+    "https://wa.me/971588319758?text=hello%20from%20you%20link";
   const mailLink =
     "mailto:deepan14132002@gmail.com?subject=Hello&body=Hi%20Deepan%2C%20I%20wanted%20to%20reach%20out%20to%20you.";
   flutterTexture.center.set(0.5, 0.5); // Set pivot to center
